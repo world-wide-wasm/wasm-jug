@@ -1,4 +1,0 @@
-WASM_PACKAGE="rust_wasm_io"
-WASM_VERSION="0.0.2"
-WASM_MODULE="hello-rust.wasm"
-WASM_FILE="./target/wasm32-wasi/release/hello_rust.wasm"
