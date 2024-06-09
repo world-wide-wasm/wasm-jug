@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="my.css">
+    <script src="wasm_exec.js"></script>
+</head>
+
+<body>
+    <h1>WASM Experiments</h1>
+    <h2>👋 Open the developer tools 😃</h2>
+    <!-- tiny -->
+    <script>
+        const go = new Go() // Go Wasm runtime
+        let importObject = go.importObject
+
+        // https://github.com/tinygo-org/tinygo/issues/1140
+        //go.importObject.gojs["syscall/js.finalizeRef"] = _ => 0 // 😉
+        
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), importObject)
+            .then(({ instance }) => {
+                
+                console.log("📦 import:", importObject)
+                console.log("🥚 instance:", instance)
+                console.log("🪟 window:", window)
+
+                go.run(instance)
+                
+                let message = Hello("Bob Morane")
+
+                document.querySelector("h1").innerHTML = message
+
+            })
+            .catch(error => {
+                console.log("😡 ouch", error)
+            })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Idea intellij light theme",
+    "terminal.integrated.fontSize": 16,
+    "editor.fontSize": 16,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": true,
+    "go.lintTool": "revive",
+    "go.toolsEnvVars": {
+      "GOOS": "js",
+      "GOARCH": "wasm",
+    },
+  }

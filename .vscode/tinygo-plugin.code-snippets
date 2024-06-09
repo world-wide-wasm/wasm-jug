@@ -1,0 +1,217 @@
+{
+  "Call Hello World": {
+    "body": [
+      "// Get a kind of pair of values",
+      "const helloWorldPosSize = instance.exports.helloWorld(pos, bytes.length);",
+      ""
+    ],
+    "description": "",
+    "prefix": "go11-call-hello-world",
+    "scope": "html,javascript"
+  },
+  "Copy String Parameter to Memory": {
+    "body": [
+      "// The TinyGo `malloc` is automatically exported",
+      "const pos = instance.exports.malloc(bytes.length);",
+      "const mem = new Uint8Array(",
+      "  instance.exports.memory.buffer, pos, bytes.length",
+      ")",
+      "mem.set(bytes);",
+      ""
+    ],
+    "description": "",
+    "prefix": "go10-copy-string-to-memory",
+    "scope": "html,javascript"
+  },
+  "Copy buffer to memory": {
+    "body": [
+      "// copyBufferToMemory copies a buffer to the WebAssembly memory buffer",
+      "func copyBufferToMemory(buffer []byte) uint64 {",
+      "  bufferPtr := \u0026buffer[0]",
+      "  unsafePtr := uintptr(unsafe.Pointer(bufferPtr))",
+      "",
+      "  pos := uint32(unsafePtr)",
+      "  size := uint32(len(buffer))",
+      "",
+      "  // [shift left + or]",
+      "  //  pos                              size",
+      "  // 110101⏺000000000000000000000000⏺10110100",
+      "",
+      "  return (uint64(pos) \u003c\u003c uint64(32)) | uint64(size)",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "go7-copy-buffer-to-memory",
+    "scope": "go"
+  },
+  "Display the string": {
+    "body": [
+      "// Decode the buffer (to string)",
+      "const str = new TextDecoder(\"utf8\").decode(extractedBuffer)",
+      "console.log(\"🎉\", str)"
+    ],
+    "description": "",
+    "prefix": "go14-display-the-string",
+    "scope": "html,javascript"
+  },
+  "Extract the buffer": {
+    "body": [
+      "const memory = instance.exports.memory;",
+      "const completeBufferFromMemory = new Uint8Array(memory.buffer);",
+      "const extractedBuffer = completeBufferFromMemory.slice(",
+      "  stringPos, stringPos + stringSize",
+      ");",
+      "console.log(\"🤖 extractedBuffer:\", extractedBuffer)",
+      ""
+    ],
+    "description": "",
+    "prefix": "go13-extract-buffer-from-memory",
+    "scope": "html,javascript"
+  },
+  "Get Pos and Size": {
+    "body": [
+      "const MASK = (2n ** 32n) - 1n;",
+      "// Extract the values of the pair (using the mask)",
+      "const stringPos = Number(helloWorldPosSize \u003e\u003e BigInt(32));",
+      "const stringSize = Number(helloWorldPosSize \u0026 MASK);",
+      "",
+      "console.log(\"🤖 Position:\", stringPos);",
+      "console.log(\"🤖 Size:\", stringSize);",
+      "",
+      "// helloWorldPosSize:",
+      "//  pos                              size",
+      "// 110101⏺000000000000000000000000⏺10110100",
+      "//",
+      "// [shift right] helloWorldPosSize \u003e\u003e 32b",
+      "//  pos                              ",
+      "// 110101⏺",
+      "//",
+      "// [\u0026 mask] helloWorldPosSize \u0026 mask",
+      "//  mask ⏺111111111111111111111111⏺11111111",
+      "//  pos                              size",
+      "//       ⏺000000000000000000000000⏺10110100",
+      ""
+    ],
+    "description": "",
+    "prefix": "go12-get-pos-and-size-of-the-result",
+    "scope": "html,javascript"
+  },
+  "Go Wasm add Function": {
+    "body": [
+      "//export add",
+      "func add(x int, y int) int {",
+      "  return x + y",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "go1-add-function",
+    "scope": "go"
+  },
+  "Go Wasm hello Function": {
+    "body": [
+      "//export hello",
+      "func hello(name string) string {",
+      "  print(name)",
+      "",
+      "  return \"hello \" + name",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "go2-hello-function",
+    "scope": "go"
+  },
+  "Hello world wasm function": {
+    "body": [
+      "//export helloWorld",
+      "func helloWorld(bufferPosition *uint32, length int) uint64 {",
+      "",
+      "  nameBytes := readBufferFromMemory(bufferPosition, length)",
+      "",
+      "  message := \"👋 Hello World \" + string(nameBytes) + \" 🌍\"",
+      "",
+      "  println(\"🩵 HEY PEOPLE 💜\")",
+      "",
+      "  return copyBufferToMemory([]byte(message))",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "go8-hello-world-wasm-function",
+    "scope": "go"
+  },
+  "Read buffer from memory": {
+    "body": [
+      "// readBufferFromMemory returns a buffer from the WebAssembly memory buffer",
+      "func readBufferFromMemory(bufferPosition *uint32, length int) []byte {",
+      "  buffer := make([]byte, length)",
+      "  pointer := uintptr(unsafe.Pointer(bufferPosition))",
+      "  for i := 0; i \u003c length; i++ {",
+      "    s := *(*int32)(unsafe.Pointer(pointer + uintptr(i)))",
+      "    buffer[i] = byte(s)",
+      "  }",
+      "  return buffer",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "go6-read-buffer-from-memory",
+    "scope": "go"
+  },
+  "String Parameter": {
+    "body": [
+      "const stringParameter = \"Bob Morane 🤗\";",
+      "const bytes = new TextEncoder(\"utf8\").encode(stringParameter);",
+      "    ",
+      ""
+    ],
+    "description": "",
+    "prefix": "go9-prepare-string-parameter",
+    "scope": "html,javascript"
+  },
+  "Wasm Function Caller": {
+    "body": [
+      "console.log(\"📦 Wasm Module Instance\", instance)",
+      "const value = instance.exports.add(2, 2)",
+      "console.log(\"🤖 add(2,2):\", value)",
+      "console.log('👋 hello(\"Bob\"):', instance.exports.hello(\"Bob\"))",
+      ""
+    ],
+    "description": "Call the Wasm Function",
+    "prefix": "go4-call-wasm-function",
+    "scope": "html,javascript"
+  },
+  "Wasm Plugin Loader": {
+    "body": [
+      "WebAssembly.instantiateStreaming(fetch(\"main.wasm\")) ",
+      "  .then(({ instance }) =\u003e {",
+      "    // call the function (4)",
+      "  })",
+      "  .catch(error =\u003e {",
+      "    console.log(\"😡 ouch\", error)",
+      "  })",
+      ""
+    ],
+    "description": "Load the Wasm Plugin",
+    "prefix": "go3-load-wasm-plugin",
+    "scope": "html,javascript"
+  },
+  "importObject Polyfill": {
+    "body": [
+      "// every language support should provide something like this",
+      "let importObject = {",
+      "  wasi_snapshot_preview1: {",
+      "    fd_write: () =\u003e 0,",
+      "  }",
+      "}",
+      "// https://dev.to/ndesmic/building-a-minimal-wasi-polyfill-for-browsers-4nel",
+      "// https://blog.jeremylikness.com/blog/explore-wasi-from-your-browser/",
+      ""
+    ],
+    "description": "importObject Polyfill",
+    "prefix": "go5-import-object-polyfill",
+    "scope": "html,javascript"
+  }
+}

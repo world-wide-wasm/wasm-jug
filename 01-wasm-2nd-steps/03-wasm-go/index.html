@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="my.css">
+
+</head>
+
+<body>
+  <h1>WASM Experiments</h1>
+  <h2>👋 Open the developer tools 😃</h2>
+  <!-- hf -->
+  <script>	
+    let importObject = {
+      wasi_snapshot_preview1: {
+        fd_write: () => 0
+      },
+      // 1- add yo function   
+      // ✋ this is a host function   
+      env: {
+        yo: () => {
+          console.log("👋 yo, I'm a JavaScript", "🚀 I was triggered by TinyGo!")
+        }
+      }
+      
+    }
+
+    WebAssembly.instantiateStreaming(fetch("main.wasm"), importObject)
+      .then(({ instance }) => {
+
+        console.log("📦 Instance", instance)
+
+        // Call helloWorld, helloWorld will call yo()
+        instance.exports.helloWorld()
+
+      })
+      .catch(error => {
+        console.log("😡 ouch", error)
+      })
+
+  </script>
+</body>
+
+</html>

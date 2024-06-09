@@ -1,0 +1,55 @@
+{
+  "C Wasm Body Function": {
+    "body": [
+      "float res = number;",
+      "  for (int i = 0;i \u003c pow - 1; i++) {",
+      "    res = res * number;",
+      "  }",
+      "return res;",
+      ""
+    ],
+    "description": "this is the body of the function",
+    "prefix": "c2-wasm-body-function",
+    "scope": "c"
+  },
+  "C Wasm Function": {
+    "body": [
+      "#define WASM_EXPORT __attribute__((visibility(\"default\")))",
+      "",
+      "WASM_EXPORT ",
+      "float power(float number, int pow) {",
+      "  // foo",
+      "}",
+      ""
+    ],
+    "description": "this is the skeleton of the function",
+    "prefix": "c1-wasm-function",
+    "scope": "c"
+  },
+  "Wasm Function Caller": {
+    "body": [
+      "console.log(\"📦 Wasm Module Instance\", instance)",
+      "const value = instance.exports.power(2, 2)",
+      "console.log(\"🤖 value:\", value)",
+      ""
+    ],
+    "description": "Call the Wasm Function",
+    "prefix": "c4-call-wasm-function",
+    "scope": "html,javascript"
+  },
+  "Wasm Plugin Loader": {
+    "body": [
+      "WebAssembly.instantiateStreaming(fetch(\"main.wasm\")) ",
+      "  .then(({ instance }) =\u003e {",
+      "    // foo",
+      "  })",
+      "  .catch(error =\u003e {",
+      "    console.log(\"😡 ouch\", error)",
+      "  })",
+      ""
+    ],
+    "description": "Load the Wasm Plugin",
+    "prefix": "c3-load-wasm-plugin",
+    "scope": "html,javascript"
+  }
+}

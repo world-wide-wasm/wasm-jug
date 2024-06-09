@@ -1,0 +1,4 @@
+WASM_PACKAGE="go_wasm_io"
+WASM_VERSION="0.0.2"
+WASM_MODULE="hello-go.wasm"
+WASM_FILE="./hello-go.wasm"

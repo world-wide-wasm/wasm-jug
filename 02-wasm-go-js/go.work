@@ -1,0 +1,11 @@
+go 1.21.3
+
+use (
+ ./07-dom
+ ./08-return-json
+ ./09-json-as-parameter
+ ./10-call-a-js-function
+ ./11-call-a-promise
+)
+
+// go work sync

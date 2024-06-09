@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="my.css">
+    <script src="wasm_exec.js"></script>
+  </head>
+  <body>
+    <h1>WASM Experiments</h1>
+    <h2>This is a subtitle</h2>
+
+    <script> 
+
+      function loadWasm(path) {
+        const go = new Go()
+
+        // Hack for use TinyGo
+        // https://github.com/tinygo-org/tinygo/issues/1140
+        go.importObject.gojs["syscall/js.finalizeRef"] = _ => 0 // 😉
+
+        return new Promise((resolve, reject) => {
+          WebAssembly.instantiateStreaming(fetch(path), go.importObject)
+          .then(result => {
+            go.run(result.instance)
+            resolve(result.instance)
+          })
+          .catch(error => {
+            reject(error)
+          })
+        })
+      }
+
+      loadWasm("main.wasm").then(wasm => {
+        console.log("😃 main.wasm is loaded")
+
+        // Call Wasm Hello function with Json argument
+        let jsonData = Hello({
+          firstName: "😍 Bob", 
+          lastName: "😘 Morane"
+        })        
+        console.log("📝", jsonData)
+        
+        // Use the JSON data
+        document.querySelector("h1").innerHTML = jsonData.message
+        document.querySelector("h2").innerHTML = jsonData.greetings
+        
+
+      }).catch(error => {
+        console.log("😡 ouch", error)
+      }) 
+
+    </script>
+  </body>
+</html>
+
+
+

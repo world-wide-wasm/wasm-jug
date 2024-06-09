@@ -1,0 +1,9 @@
+go 1.21.1
+
+use (
+	./03-go-plugin
+	./05-go-host-application
+	./06-http-server
+)
+
+// go work sync

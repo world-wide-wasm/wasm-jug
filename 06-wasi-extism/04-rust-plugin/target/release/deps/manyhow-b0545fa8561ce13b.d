@@ -1,0 +1,11 @@
+/workspaces/wasm-jug/06-wasi-extism/04-rust-plugin/target/release/deps/libmanyhow-b0545fa8561ce13b.rmeta: /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/lib.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/span_ranged.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/macro_rules.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/error.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/parse_to_tokens.rs
+
+/workspaces/wasm-jug/06-wasi-extism/04-rust-plugin/target/release/deps/libmanyhow-b0545fa8561ce13b.rlib: /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/lib.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/span_ranged.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/macro_rules.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/error.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/parse_to_tokens.rs
+
+/workspaces/wasm-jug/06-wasi-extism/04-rust-plugin/target/release/deps/manyhow-b0545fa8561ce13b.d: /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/lib.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/span_ranged.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/macro_rules.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/error.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/parse_to_tokens.rs
+
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/lib.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/span_ranged.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/macro_rules.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/error.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/manyhow-0.11.1/src/parse_to_tokens.rs:

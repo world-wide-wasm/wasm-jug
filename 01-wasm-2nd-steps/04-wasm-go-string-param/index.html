@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="my.css">
+
+</head>
+
+<body>
+    <h1>WASM Experiments</h1>
+    <h2>👋 Open the developer tools 😃</h2>
+
+    <script>
+        console.log("HELLO")
+        
+        let importObject = {
+            wasi_snapshot_preview1: {
+                fd_write: () => 0
+            },
+            env: {
+                // 3- add host function
+                hostDisplay: (pos, size) => {
+                
+                    console.log("🎉", "position:", pos, "size:", size)
+                
+                    // 4- Read the shared memory to get the message
+                    const memory = instance.exports.memory
+
+                    // 5- Get the memory buffer
+                    const completeBufferFromMemory = new Uint8Array(memory.buffer)
+                    
+                    // 6- Extract the string from the memory buffer
+                    // thanks to the position and the size
+                    const extractedBuffer = completeBufferFromMemory.slice(
+                        pos, pos + size
+                    )
+                    // 7-Decode and display the message
+                    const message = new TextDecoder("utf8").decode(extractedBuffer)
+                    console.log("🤖>", message)
+                
+                }
+                
+      
+            }
+        }
+
+        console.log(importObject)
+
+
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), importObject)
+            .then(({ instance }) => {
+                // 8- make the instance global
+               window.instance = instance
+                //console.log("👋", instance)
+                
+                instance.exports.helloWorld()
+
+            })
+            .catch(error => {
+                console.log("😡 ouch", error)
+            })
+
+    </script>
+</body>
+
+</html>

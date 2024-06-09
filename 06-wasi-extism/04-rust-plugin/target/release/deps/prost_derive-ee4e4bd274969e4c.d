@@ -1,0 +1,11 @@
+/workspaces/wasm-jug/06-wasi-extism/04-rust-plugin/target/release/deps/libprost_derive-ee4e4bd274969e4c.so: /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/lib.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/mod.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/group.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/map.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/message.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/oneof.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/scalar.rs
+
+/workspaces/wasm-jug/06-wasi-extism/04-rust-plugin/target/release/deps/prost_derive-ee4e4bd274969e4c.d: /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/lib.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/mod.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/group.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/map.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/message.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/oneof.rs /home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/scalar.rs
+
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/lib.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/mod.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/group.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/map.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/message.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/oneof.rs:
+/home/wasm/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-derive-0.12.6/src/field/scalar.rs:

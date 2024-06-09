@@ -1,0 +1,10 @@
+go 1.21.1
+
+use (
+	./03-wasm-go
+	./04-wasm-go-string-param
+	./05-wasm-go-the-easy-way
+	./06-wasm-tinygo-the-easy-way
+)
+
+// go work sync

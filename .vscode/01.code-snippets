@@ -1,0 +1,135 @@
+{
+  "Add a reference to hostDisplay": {
+    "body": [
+      "//export hostDisplay",
+      "func hostDisplay(pos, size uint32)",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf9-add-ref-to-hostDisplay",
+    "scope": "go"
+  },
+  "Ref to Yo host function": {
+    "body": [
+      "//export yo",
+      "func yo()",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf2-ref-to-yo-host-function",
+    "scope": "go"
+  },
+  "Yo host function": {
+    "body": [
+      "env: {",
+      "  yo: () =\u003e {",
+      "    console.log(\"👋 yo\", \"🚀 I was triggered by TinyGo!\")",
+      "  }",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf1-yo-host-function",
+    "scope": "html,javascript"
+  },
+  "call the host function": {
+    "body": [
+      "hostDisplay(pos, size)",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf12-call the host function",
+    "scope": "go"
+  },
+  "copy message to the memory buffer": {
+    "body": [
+      "buffer := []byte(message)",
+      "bufferPtr := \u0026buffer[0]",
+      "unsafePtr := uintptr(unsafe.Pointer(bufferPtr))",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf10-copy-message-to-memory",
+    "scope": "go"
+  },
+  "decode and display string": {
+    "body": [
+      "const message = new TextDecoder(\"utf8\").decode(extractedBuffer)",
+      "console.log(\"🤖\u003e\", message)",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf7-decode and display string",
+    "scope": "html,javascript"
+  },
+  "extract string": {
+    "body": [
+      "const extractedBuffer = completeBufferFromMemory.slice(",
+      "    pos, pos + size",
+      ")",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf6-get extract string",
+    "scope": "html,javascript"
+  },
+  "get memory buffer": {
+    "body": [
+      "const completeBufferFromMemory = new Uint8Array(memory.buffer)",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf5-get memory buffer",
+    "scope": "html,javascript"
+  },
+  "hostDisplay host function": {
+    "body": [
+      "hostDisplay: (pos, size) =\u003e {",
+      "",
+      "    console.log(\"🎉\", \"position:\", pos, \"size:\", size)",
+      "",
+      "    // 4- Read the shared memory to get the message",
+      "",
+      "    // 5- Get the memory buffer",
+      "",
+      "    // 6- Extract the string from the memory buffer",
+      "    // thanks to the position and the size",
+      "",
+      "    // 7-Decode and display the message",
+      "",
+      "}",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf3-display",
+    "scope": "html,javascript"
+  },
+  "make the instance global": {
+    "body": [
+      "window.instance = instance",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf8-make the instance global",
+    "scope": "html,javascript"
+  },
+  "read memory": {
+    "body": [
+      "const memory = instance.exports.memory",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf4-read memory",
+    "scope": "html,javascript"
+  },
+  "set the position and the size": {
+    "body": [
+      "pos := uint32(unsafePtr)",
+      "size := uint32(len(buffer))",
+      ""
+    ],
+    "description": "",
+    "prefix": "hf11-set the position and the size",
+    "scope": "go"
+  }
+}

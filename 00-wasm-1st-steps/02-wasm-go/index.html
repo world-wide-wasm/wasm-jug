@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="my.css">
+  </head>
+    <!-- go -->
+    <body>
+        <h1>WASM Experiments</h1>
+        <h2>👋 Open the developer tools 😃</h2>
+        <h3></h3>
+        <script> 
+            // Load the wasm file
+            let importObject = {
+              wasi_snapshot_preview1: {
+                fd_write: () => 0,
+              }
+            }
+
+            WebAssembly.instantiateStreaming(fetch("main.wasm"), importObject) 
+              .then(({ instance }) => {
+                console.log("📦 Instance", instance)
+                // 🖐 Prepare the string argument (9)
+                const stringParameter = "Bob Morane";
+                const bytes = new TextEncoder("utf8").encode(stringParameter);
+                
+                // Copy argument to memory (10)
+                // The TinyGo `malloc` is automatically exported
+                const pos = instance.exports.malloc(bytes.length);
+                const mem = new Uint8Array(
+                  instance.exports.memory.buffer, pos, bytes.length
+                )
+                mem.set(bytes);
+                
+                // Call the helloWorld TinyGo function (11)
+                // Get a kind of pair of values
+                const helloWorldPosSize = instance.exports.helloWorld(pos, bytes.length);
+                
+                // Get pos and size of the result (12)
+                const MASK = (2n ** 32n) - 1n;
+                // Extract the values of the pair (using the mask)
+                const stringPos = Number(helloWorldPosSize >> BigInt(32));
+                const stringSize = Number(helloWorldPosSize & MASK);
+                
+                console.log("🤖 Position:", stringPos);
+                console.log("🤖 Size:", stringSize);
+                
+                // helloWorldPosSize:
+                //  pos                              size
+                // 110101⏺000000000000000000000000⏺10110100
+                //
+                // [shift right] helloWorldPosSize >> 32b
+                //  pos                              
+                // 110101⏺
+                //
+                // [& mask] helloWorldPosSize & mask
+                //  mask ⏺111111111111111111111111⏺11111111
+                //  pos                              size
+                //       ⏺000000000000000000000000⏺10110100
+                
+                // Read the memory and (13)
+                // "Extract" the buffer 
+                const memory = instance.exports.memory;
+                const completeBufferFromMemory = new Uint8Array(memory.buffer);
+                const extractedBuffer = completeBufferFromMemory.slice(
+                  stringPos, stringPos + stringSize
+                );
+                console.log("🤖 extractedBuffer:", extractedBuffer)
+                
+                // Display the string (14)
+                // Decode the buffer (to string)
+                const str = new TextDecoder("utf8").decode(extractedBuffer)
+                console.log("🎉", str)
+                document.querySelector("h3").innerHTML=str
+
+              })
+              .catch(error => {
+                console.log("😡 ouch", error)
+              })
+        </script>
+  </body>
+</html>
