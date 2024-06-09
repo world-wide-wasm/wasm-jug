@@ -1,5 +1,10 @@
 package garden.bots.cracker;
 
+import com.dylibso.chicory.log.SystemLogger;
+import com.dylibso.chicory.runtime.*;
+import com.dylibso.chicory.runtime.Module;
+import com.dylibso.chicory.wasi.WasiOptions;
+import com.dylibso.chicory.wasi.WasiPreview1;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
@@ -8,11 +13,7 @@ import io.vertx.ext.web.Router;
 
 import io.vertx.ext.web.RoutingContext;
 
-import com.dylibso.chicory.runtime.ExportFunction;
 import com.dylibso.chicory.wasm.types.Value;
-import com.dylibso.chicory.runtime.Module;
-import com.dylibso.chicory.runtime.Instance;
-import com.dylibso.chicory.runtime.Memory;
 
 import java.io.File;
 
@@ -107,11 +108,22 @@ public class MainVerticle extends AbstractVerticle {
       startPromise.fail(new Throwable("FAIL: Fill WASM_FILE"));
     }
 
+    //https://github.com/dylibso/chicory/tree/main/wasi#how-to-use
+    var logger = new SystemLogger();
+    // let's just use the default options for now
+    var options = WasiOptions.builder().build();
+    // create our instance of wasip1
+    var wasi = new WasiPreview1(logger, WasiOptions.builder().build());
+    // turn those into host imports. Here we could add any other custom imports we have
+    var imports = new HostImports(wasi.toHostFunctions());
 
-    //! Load the wasm module
+    // Load the wasm module
     System.out.println("Wasm file: " + wasmFileLocalLocation);
 
-    Module module = Module.builder(new File(wasmFileLocalLocation)).build();
+    // create the module
+    var module = Module.builder(new File(wasmFileLocalLocation)).build().withHostImports(imports);
+    // instantiate and connect our imports, this will execute the module
+    //var instance = module.instantiate();
 
     //! Define the route handler
     var handler = this.defineHandler(module, wasmFunctionName);

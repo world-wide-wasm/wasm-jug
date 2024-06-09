@@ -20,7 +20,7 @@
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <vertx.version>4.3.7</vertx.version>
+    <vertx.version>4.5.8</vertx.version>
     <junit-jupiter.version>5.7.0</junit-jupiter.version>
 
     <main.verticle>garden.bots.cracker.MainVerticle</main.verticle>
@@ -40,26 +40,19 @@
   </dependencyManagement>
 
   <dependencies>
-
-    <!-- Extism -->
-    <!--
-    <dependency>
-        <groupId>org.extism.sdk</groupId>
-        <artifactId>extism</artifactId>
-        <version>1.0.1</version>
-    </dependency>
-    -->
-    <!-- Extism -->
-
-
     <!-- Chicory -->
     <dependency>
       <groupId>com.dylibso.chicory</groupId>
       <artifactId>runtime</artifactId>
       <version>0.0.10</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.dylibso.chicory</groupId>
+      <artifactId>wasi</artifactId>
+      <version>0.0.10</version>
+    </dependency>
     <!-- Chicory -->
-    
 
     <dependency>
       <groupId>io.vertx</groupId>
