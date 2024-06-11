@@ -1,0 +1,18 @@
+spin_manifest_version = 2
+
+[application]
+name = "hey-spin"
+version = "0.1.0"
+authors = ["@k33g <ph.charriere@gmail.com>"]
+description = "this is a demo"
+
+[[trigger.http]]
+route = "/..."
+component = "hey-spin"
+
+[component.hey-spin]
+source = "target/wasm32-wasi/release/hey_spin.wasm"
+allowed_outbound_hosts = []
+[component.hey-spin.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
